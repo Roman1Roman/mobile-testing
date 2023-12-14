@@ -1,10 +1,10 @@
 import allure, os
+import requests
 from dotenv import load_dotenv
 from selene import browser, support
 
 
 def attach_bstack_video(session_id):
-    import requests
     bstack_session = requests.get(
         f'https://api.browserstack.com/app-automate/sessions/{session_id}.json',
         auth=(os.getenv('USER_NAME'), os.getenv('ACCESS_KEY')),
@@ -33,6 +33,6 @@ def attach_bstack_screenshot():
 def attach_bstack_page_source():
     allure.attach(
         browser.driver.page_source,
-        name='screen xml dump',
+        name='page_source_xml',
         attachment_type=allure.attachment_type.XML,
     )
